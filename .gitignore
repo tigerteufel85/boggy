@@ -1,0 +1,7 @@
+/.idea
+/bin
+/config/config.yaml
+/config/user.list
+/config/schedule.list
+/boggy
+/go.sum

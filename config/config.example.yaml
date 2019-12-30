@@ -1,0 +1,162 @@
+slack:
+  token:
+
+jira:
+  host: https://
+  username:
+  password:
+  projects:
+    - ABC
+    - DEF
+    - GHI
+
+  statuses:
+    open: "Unresolved"
+    unresolved: "Unresolved"
+    fixed: "\"Fixed/Done\""
+    rejected: "\"Cannot Reproduce\", Duplicate, \"Won't Fix/Rejected\""
+    closed: "\"Cannot Reproduce\", Duplicate, \"Won't Fix/Rejected\", \"Fixed/Done\""
+
+  priorities:
+    default:
+      value: ""
+      icon: ""
+    none:
+      value: None
+      icon: ":white_circle:"
+    minor:
+      value: Minor
+      icon: ":jira_minor:"
+    medium:
+      value: Medium
+      icon: ":jira_medium:"
+    major:
+      value: Major
+      icon: ":jira_major:"
+    critical:
+      value: Critical
+      icon: ":jira_critical:"
+    blocker:
+      value: Blocker
+      icon: ":jira_blocker:"
+
+  featureteams:
+    field: customfield_12360
+    projects:
+      - FOE
+    default: ":scream:"
+    teams:
+      "More Better": ":heavy_plus_sign:"
+      "Infernal Squirrel": ":chipmunk:"
+      "Raccoon": ":raccoon:"
+      "Double Trouble": ":busts_in_silhouette:"
+
+  bugoverview:
+    listall:
+      - ABC
+    all: "<type:bug> <status:open>"
+    medium: "<type:bug> <prio>blocker,critical,major,medium</prio> <status:open>"
+
+  sorting:
+    default:
+
+replies:
+  jira:
+    default:
+      title: "I found %d issues:"
+      text: list
+      parameter: amount
+      color: e8e8e8
+      optionalfields: false
+    overviewall:
+      title:
+      text: "All Open Bugs: *%d*"
+      parameter: amount
+      color: all
+      optionalfields: false
+    overviewmedium:
+      title:
+      text: "Medium+ Bugs: *%d*"
+      parameter: amount
+      color: medium
+      optionalfields: false
+    overviewlist:
+      title:
+      text: list
+      parameter:
+      color:
+      optionalfields: true
+    1:
+      title: ":rotating_light::rotating_light::rotating_light: ***NEW BUG*** :rotating_light::rotating_light::rotating_light:"
+      text: list
+      parameter:
+      color: danger
+      optionalfields: true
+    2:
+      title: ":beetle::bug::bee: New Issues :beetle::bug::bee:"
+      text: list
+      parameter:
+      color: warning
+      optionalfields: true
+    3:
+      title:
+      text: "All Open Bugs: *%d*"
+      parameter: amount
+      color: all
+      optionalfields: false
+    4:
+      title:
+      text: "Medium+ Bugs: *%d*"
+      parameter: amount
+      color: medium
+      optionalfields: false
+    5:
+      title:
+      text: list
+      parameter:
+      color:
+      optionalfields: true
+    6:
+      title: "New tickets have been assigned to %s:"
+      text: list
+      parameter: assignee
+      color:
+      optionalfields: true
+    7:
+      title: "Recently closed tickets:"
+      text: list
+      parameter:
+      color:
+      optionalfields: false
+
+  bugthresholds:
+    all:
+      danger: 75
+      warning: 50
+    medium:
+      danger: 25
+      warning: 20
+
+  colors:
+    red: "d04437"
+    yellow: "ffa500"
+    green: "good"
+    blue: "0000cc"
+    grey: "e8e8e8"
+
+regex:
+  jiraassignee: "(?i:<assignee:)([a-zA-Z. ]*)(>)"
+  jiracustom: "(?i:<jql>)([a-zA-Z0-9 .,;~=\"()><\\-+!&|]*)(</jql>)"
+  jiraissuetype: "(?i:<type:)([a-zA-Z ]*)(>)"
+  jiraoption: "(?i:<option:)([a-zA-Z]*)(>)"
+  jirapriority: "(?i:<prio>)([a-zA-Z, ]*)(</prio>)"
+  jiraproject: "(?i:<project:)([a-zA-Z]*)(>)"
+  jirasorting: "(?i:<sort:)([a-zA-Z]*)(>)"
+  jirastatus: "(?i:<status:)([a-zA-Z]*)(>)"
+  jiratime: "(?i:<time:)([0-9]*[mhdw])(>)"
+  replycolor: "(?i:<color:)([a-zA-Z0-9]*)(>)"
+  replylayout: "(?i:<layout:)([a-zA-Z0-9]*)(>)"
+  replylist: "(?i:<list:)([a-zA-Z0-9]*)(>)"
+  replytitle: "(?i:<title>)([a-zA-Z0-9 .,;:=\"()><\\-+!?&|_]*)(</title>)"
+  croncommand: "(?i:<command>)([a-zA-Z0-9 .,;~:=\"()><\\-+!&|\\/_]*)(</command>)"
+  crontime: "(?i:<cron:)([0-9 *-?\\/]*)(>)"

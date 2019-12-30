@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  bot:
+    image: boggy:latest
+    build: .
+    restart: always
+    volumes:
+      - ./config/config.yaml:/config/config.yaml
+      - ./config/user.list:/config/user.list
+      - ./config/schedule.list:/config/schedule.list
