@@ -121,8 +121,8 @@ Schedules are best when used in combination with clever commands such as every 1
 *Examples*
 - `schedule list`
 - `schedule delete 1535644787286904783`
-- `schedule add <cron:0 0/10 * * * *> <command>jira issues <project:test> <assignee:tigerteufel> <time:10m> <layout:7></command>`
-- `schedule add <cron:0 0/10 * * * *> <command>jira issues <project:test> <type:bug> <option:created> <time:10m></command>`
+- `schedule add <cron:0/10 * * * *> <command>jira issues <project:test> <assignee:tigerteufel> <time:10m> <layout:7></command>`
+- `schedule add <cron:0/10 * * * *> <command>jira issues <project:test> <type:bug> <option:created> <time:10m></command>`
 
 
 # Installation

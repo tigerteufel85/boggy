@@ -79,6 +79,13 @@ func (c *scheduleAdd) Execute(ctx context.Context, b *bot.Bot, eventText string,
 	time := utils.ParseRegex(eventText, c.regex.CronTime)
 	command := utils.ParseRegex(eventText, c.regex.CronCommand)
 
+	// to not overload jira servers we do not use seconds even if provided
+	timeFields := strings.Split(time, " ")
+	if len(timeFields) == 6 {
+		timeFields = timeFields[1:]
+	}
+	time = strings.Join(timeFields, " ")
+
 	var re = regexp.MustCompile("^([\\S]+)")
 	time = re.ReplaceAllString(strings.Trim(time, " "), "0")
 
@@ -120,8 +127,8 @@ func (c *scheduleAdd) GetHelp() []bot.Help {
 			"schedule add",
 			"adds a new schedule by cron",
 			[]string{
-				"schedule add <cron:0 1/10 * * * *> <command>jira issues <project:foe> <type:bug> <prio>blocker</prio> <option:created> <time:10m></command>",
-				"schedule add <cron:0 0 10 * * 1-5> <command>overview bugs <project:foe></command>",
+				"schedule add <cron:1/10 * * * *> <command>jira issues <project:foe> <type:bug> <prio>blocker</prio> <option:created> <time:10m></command>",
+				"schedule add <cron:0 10 * * 1-5> <command>overview bugs <project:foe></command>",
 			},
 		},
 	}
