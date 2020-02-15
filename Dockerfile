@@ -1,15 +1,14 @@
-FROM golang:latest as builder
+FROM golang:1.11-alpine as builder
 ENV GO111MODULE=on
 WORKDIR /boggy/
 COPY . ./
-RUN make dep \
- && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -mod=readonly -a -o /app .
 
-FROM debian:stable-slim
-RUN apt-get update -y && \
-    apt-get install ca-certificates netcat strace wget -y
-RUN update-ca-certificates
-RUN mkdir -p images
+RUN apk add git
+RUN CGO_ENABLED=0 go build -o /app boggy.go
+
+FROM alpine:latest as alpine
+RUN apk add --no-cache git ca-certificates tzdata
 RUN mkdir -p config
 COPY --from=builder app .
+
 CMD ["./app"]

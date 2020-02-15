@@ -14,7 +14,7 @@ Boggy is a slack bot primarily meant to improve the workflow of QA in developmen
 - install Docker incl. docker-compose
 - clone this repo or at least fetch the docker-compose.yaml
 - create a config.yaml under config following the config.example.yaml
-- `make docker-build` and `docker-compose up`
+- `docker-compose up`
 
 **Advanced** (when planning working on the bot core)
 - install go (at least 1.11)

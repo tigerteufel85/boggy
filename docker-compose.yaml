@@ -2,7 +2,7 @@ version: '3'
 
 services:
   bot:
-    image: boggy:latest
+    image: tigerteufel/boggy:latest
     build: .
     restart: always
     volumes:
