@@ -4,6 +4,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/tigerteufel85/boggy)](https://goreportcard.com/report/github.com/tigerteufel85/boggy)
 [![Release](https://img.shields.io/github/release/tigerteufel85/boggy.svg)](https://github.com/tigerteufel85/boggy/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Docker Pulls](https://img.shields.io/docker/pulls/tigerteufel/boggy.svg)](https://hub.docker.com/repository/docker/tigerteufel/boggy)
 
 Boggy is a slack bot primarily meant to improve the workflow of QA in development teams, with focus on JIRA integration.
 

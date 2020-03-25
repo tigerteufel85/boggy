@@ -47,7 +47,7 @@ func (c *scheduleList) Execute(ctx context.Context, b *bot.Bot, eventText string
 	for _, value := range tasks {
 		if user.Right == bot.UserRightAdmin && option == "all" && client.Channels[value.Schedule.Channel] != "" {
 			value.Schedule.Channel = "#" + client.Channels[value.Schedule.Channel]
-			message += fmt.Sprintf("*%s* - `%s` (%s)\n```%s````\n", value.Name, value.Schedule.CronTime, value.Schedule.Channel, value.Schedule.Command)
+			message += fmt.Sprintf("%s - `%s` (%s)\n```%s```\n", value.Name, value.Schedule.CronTime, value.Schedule.Channel, value.Schedule.Command)
 		} else {
 			message += fmt.Sprintf("%s - `%s`\n```%s```\n", value.Name, value.Schedule.CronTime, value.Schedule.Command)
 		}
