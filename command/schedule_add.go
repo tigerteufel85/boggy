@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"github.com/tigerteufel85/boggy/client"
 	"github.com/tigerteufel85/boggy/config"
-	"regexp"
 	"strings"
 
 	"github.com/nlopes/slack"
@@ -85,9 +84,6 @@ func (c *scheduleAdd) Execute(ctx context.Context, b *bot.Bot, eventText string,
 		timeFields = timeFields[1:]
 	}
 	time = strings.Join(timeFields, " ")
-
-	var re = regexp.MustCompile("^([\\S]+)")
-	time = re.ReplaceAllString(strings.Trim(time, " "), "0")
 
 	if !b.IsValidSchedule(time) {
 		c.slackClient.Respond(event, fmt.Sprintf("I'm sorry, but \"%s\" is not a valid schedule. Please check *@boggy help schedule>* for more information", time))
