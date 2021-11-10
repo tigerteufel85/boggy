@@ -188,7 +188,7 @@ Some are neeeded by default as they are used by commands. The color value `all` 
 replies:
   jira:
     default:
-      title: "I found %d issues:"
+      title: "I found %d issue(s):"
       text: list
       parameter: amount
       color: e8e8e8
