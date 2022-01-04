@@ -104,6 +104,17 @@ Query information from Jira for or a whole list of tickets.
 - filters by a JQL query, please do not add any ordering to it
 - please use with care as it makes the commands flexible but also more error prone
 
+## JIRA Single
+Query information from Jira and posts each issue one by one.
+
+### Parameters
+Generally the same parameters as for "JIRA Issues" can be used but there are a few additional ones.
+
+#### `<offset-field:Start Time>` + `<offset-time:1h>` + `<time:10m>`
+- queries tickets where the time from the Start Time field starts in 1h and lasts for 10m
+- if current time is 2022-01-01 10:00 and with an offset of 1h and time of 10m
+- it creates a query like `"Start Time" >= "2022-01-01 11:00" AND "Start Time" <= "2022-01-01 11:10"`
+
 ## Bugs Overview
 Creates an overview of the current bug status of a project.
 

@@ -105,9 +105,9 @@ func (c *jiraIssuesSingle) GetHelp() []bot.Help {
 	return []bot.Help{
 		{
 			"jira issues single",
-			"creates a slack response for each crm sale which will start",
+			"creates a slack response for each crm sale which will start, the placeholders will be replaced respectively",
 			[]string{
-				"jira issues single<project:crm><offset-field:Start Time><offset-time:1h><jql>“Campaign Category” = Sale</jql><time:10m>",
+				"jira single <project:crm><issuetype:Campaign><offset-field:Start Time><offset-time:18h><jql>“Campaign Category” = Sale</jql><sort:starttime><title>A sale will start in %component% %date% at %time% : %summary%</title><time:90h>",
 			},
 		},
 	}
