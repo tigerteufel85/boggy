@@ -4,6 +4,7 @@ WORKDIR /boggy/
 COPY . ./
 
 RUN apk add git
+RUN go mod tidy
 RUN CGO_ENABLED=0 go build -o /app boggy.go
 
 FROM alpine:latest as alpine
