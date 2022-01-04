@@ -1,5 +1,5 @@
 # Boggy
-[![Build Status](https://travis-ci.com/tigerteufel85/boggy.svg)](https://travis-ci.com/tigerteufel85/boggy)
+[![Build Status](https://app.travis-ci.com/tigerteufel85/boggy.svg)](https://app.travis-ci.com/github/tigerteufel85/boggy)
 [![GoDoc](https://godoc.org/github.com/tigerteufel85/boggy?status.svg)](https://godoc.org/github.com/innogames/boggy)
 [![Go Report Card](https://goreportcard.com/badge/github.com/tigerteufel85/boggy)](https://goreportcard.com/report/github.com/tigerteufel85/boggy)
 [![Release](https://img.shields.io/github/release/tigerteufel85/boggy.svg)](https://github.com/tigerteufel85/boggy/releases)
