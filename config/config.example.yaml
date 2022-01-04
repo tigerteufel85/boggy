@@ -167,6 +167,6 @@ regex:
   replycolor: "(?i:<color:)([a-zA-Z0-9]*)(>)"
   replylayout: "(?i:<layout:)([a-zA-Z0-9]*)(>)"
   replylist: "(?i:<list:)([a-zA-Z0-9]*)(>)"
-  replytitle: "(?i:<title>)([a-zA-Z0-9 .,;:=\"()><\\-+!?&|_]*)(</title>)"
-  croncommand: "(?i:<command>)([a-zA-Z0-9 .,;~:=\"()><\\-+!&|\\/_]*)(</command>)"
+  replytitle: "(?i:<title>)([a-zA-Z0-9 .,;:=\"()><\\-%+!?&|_]*)(</title>)"
+  croncommand: "(?i:<command>)([a-zA-Z0-9 .,;~:=\"()><\\-%+!&|\\/_]*)(</command>)"
   crontime: "(?i:<cron:)([0-9 *-?\\/]*)(>)"
