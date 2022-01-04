@@ -182,13 +182,13 @@ jira:
 ```
 
 ## Replies
-This part of the configurations allows to create custom reply layouts for any JIRA queries.
-Some are neeeded by default as they are used by commands. The color value `all` and `medium` relates to the bug thresholds which are set separately.
+This part of the configuration allows to create custom reply layouts for any JIRA queries.
+Some are needed by default as they are used by commands. The color value `all` and `medium` relates to the bug thresholds which are set separately.
 ```
 replies:
   jira:
     default:
-      title: "I found %d issues:"
+      title: "I found %d issue(s):"
       text: list
       parameter: amount
       color: e8e8e8
