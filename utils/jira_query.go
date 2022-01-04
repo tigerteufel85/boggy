@@ -81,13 +81,13 @@ func (jql *JQL) BuildJqlQuery(config config.JiraConfig) (string, error) {
 
 	// prepare field with offset
 	if jql.OffsetField != "" && jql.OffsetTime != "" && jql.Time != "" {
-		loc, _ := time.LoadLocation("Europe/Berlin")
+		loc, _ := time.LoadLocation(config.Location)
 		timein := time.Now().In(loc)
 		timein = addTime(timein, strings.ToLower(jql.OffsetTime))
 		timeout := addTime(timein, strings.ToLower(jql.Time))
 
 		results = append(results, fmt.Sprintf(
-			"\"%s\" >= -%s AND \"%s\" <= %s",
+			"\"%s\" >= \"%s\" AND \"%s\" <= \"%s\"",
 			jql.OffsetField,
 			timein.Format(config.TimeFormat),
 			jql.OffsetField,
@@ -150,17 +150,19 @@ func addTime(startTime time.Time, offset string) time.Time {
 	timeHours := regexp.MustCompile(`^[0-9]*h$`)
 	timeDays := regexp.MustCompile(`^[0-9]*d$`)
 
+	returnTime := startTime
+
 	switch {
 	case timeMinutes.MatchString(offset):
 		timeOffset, _ := strconv.Atoi(strings.ReplaceAll(offset, "m", ""))
-		startTime.Add(time.Minute * time.Duration(timeOffset))
+		returnTime = startTime.Add(time.Minute * time.Duration(timeOffset))
 	case timeHours.MatchString(offset):
 		timeOffset, _ := strconv.Atoi(strings.ReplaceAll(offset, "h", ""))
-		startTime.Add(time.Hour * time.Duration(timeOffset))
+		returnTime = startTime.Add(time.Hour * time.Duration(timeOffset))
 	case timeDays.MatchString(offset):
 		timeOffset, _ := strconv.Atoi(strings.ReplaceAll(offset, "d", ""))
-		startTime.Add(time.Hour * 24 * time.Duration(timeOffset))
+		returnTime = startTime.Add(time.Hour * 24 * time.Duration(timeOffset))
 	}
 
-	return startTime
+	return returnTime
 }
