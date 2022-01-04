@@ -19,6 +19,8 @@ type JiraConfig struct {
 	Username     string
 	Password     string
 	Projects     []string            `yaml:",flow"`
+	Location     string
+	Components   map[string]string   `yaml:",flow"`
 	Statuses     map[string]string   `yaml:",flow"`
 	Priorities   map[string]Priority `yaml:",flow"`
 	FeatureTeams TeamConfig

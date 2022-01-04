@@ -10,6 +10,12 @@ jira:
     - DEF
     - GHI
 
+  location: "Europe/Berlin"
+
+  components:
+    "Backend": ":be:"
+    "Frontend": ":fe:"
+
   statuses:
     open: "Unresolved"
     unresolved: "Unresolved"
