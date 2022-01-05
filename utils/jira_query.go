@@ -146,9 +146,10 @@ func getStatus(statuses map[string]string, input string) string {
 }
 
 func addTime(startTime time.Time, offset string) time.Time {
-	timeMinutes := regexp.MustCompile(`^[0-9]*m$`)
-	timeHours := regexp.MustCompile(`^[0-9]*h$`)
-	timeDays := regexp.MustCompile(`^[0-9]*d$`)
+	timeMinutes := regexp.MustCompile(`^[0-9]+m$`)
+	timeHours := regexp.MustCompile(`^[0-9]+h$`)
+	timeDays := regexp.MustCompile(`^[0-9]+d$`)
+	timeWeeks := regexp.MustCompile(`^[0-9]+w$`)
 
 	returnTime := startTime
 
@@ -162,6 +163,9 @@ func addTime(startTime time.Time, offset string) time.Time {
 	case timeDays.MatchString(offset):
 		timeOffset, _ := strconv.Atoi(strings.ReplaceAll(offset, "d", ""))
 		returnTime = startTime.Add(time.Hour * 24 * time.Duration(timeOffset))
+	case timeWeeks.MatchString(offset):
+		timeOffset, _ := strconv.Atoi(strings.ReplaceAll(offset, "w", ""))
+		returnTime = startTime.Add(time.Hour * 24 * 7 * time.Duration(timeOffset))
 	}
 
 	return returnTime

@@ -162,7 +162,7 @@ regex:
   jirasorting: "(?i:<sort:)([a-zA-Z]*)(>)"
   jirastatus: "(?i:<status:)([a-zA-Z]*)(>)"
   jiratime: "(?i:<time:)([0-9]*[mhdw])(>)"
-  jiraoffsettime: "(?i:<offset-time:)([0-9]*[mhdw])(>)"
+  jiraoffsettime: "(?i:<offset-time:)([0-9]+[mhdw])(>)"
   jiraoffsetfield: "(?i:<offset-field:)([a-zA-Z ]*)(>)"
   replycolor: "(?i:<color:)([a-zA-Z0-9]*)(>)"
   replylayout: "(?i:<layout:)([a-zA-Z0-9]*)(>)"
