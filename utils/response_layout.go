@@ -6,6 +6,7 @@ import (
 	"github.com/tigerteufel85/boggy/config"
 	"gopkg.in/andygrunwald/go-jira.v1"
 	"strings"
+	"time"
 )
 
 // Layout is a wrapper for layouting the Slack replies
@@ -28,6 +29,39 @@ func NewLayout(config config.RegexConfig, input string) *Layout {
 		Color:    ParseRegex(input, config.ReplyColor),
 		List:     ParseRegex(input, config.ReplyList),
 	}
+}
+
+func (layout *Layout) BuildSimpleTextResponse(config config.JiraConfig, issue jira.Issue, customFields jira.CustomFields, allFields []jira.Field, jql *JQL) string {
+	responseText := layout.Title
+
+	var components []string
+	for _, component := range issue.Fields.Components {
+		components = append(components, component.Name)
+	}
+
+	var offsetFieldId string
+	for _, field := range allFields {
+		if field.Name == jql.OffsetField {
+			offsetFieldId = field.ID
+			break
+		}
+	}
+
+	loc, _ := time.LoadLocation(config.Location)
+	timeNow := time.Now().In(loc).Format("2006-01-02")
+	jiraTime, _ := time.Parse("2006-01-02T15:04:05.000+0000", customFields[offsetFieldId])
+
+	jiraDate := jiraTime.In(loc).Format("2006-01-02")
+	if strings.HasPrefix(jiraDate, timeNow) {
+		jiraDate = "today"
+	}
+
+	responseText = strings.Replace(responseText, "%component%", getComponentIcon(config, strings.Join(components, ", ")), -1)
+	responseText = strings.Replace(responseText, "%summary%", issue.Fields.Summary, -1)
+	responseText = strings.Replace(responseText, "%date%", jiraDate, -1)
+	responseText = strings.Replace(responseText, "%time%", jiraTime.In(loc).Format("15:04"), -1)
+
+	return responseText
 }
 
 // BuildAttachment creates Slack Attachments for Slack replies
@@ -205,6 +239,14 @@ func convertMarkdown(content string) string {
 
 func createJiraLink(config config.JiraConfig, issueKey string) string {
 	return fmt.Sprintf("<%s/browse/%s|%s>", config.Host, issueKey, issueKey)
+}
+
+func getComponentIcon(config config.JiraConfig, component string) string {
+	if val, ok := config.Components[component]; ok {
+		return val
+	}
+
+	return component
 }
 
 func getPriorityIcon(priorities map[string]config.Priority, id string) string {

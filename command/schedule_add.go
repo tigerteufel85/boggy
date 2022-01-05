@@ -43,6 +43,7 @@ func (c *scheduleAdd) IsValid(b *bot.Bot, command string) bool {
 func (c *scheduleAdd) getAllowedCommands() []bot.Command {
 	return []bot.Command{
 		NewJiraIssues(c.slackClient, c.jira, c.jiraCfg, c.jiraReplies, c.regex),
+		NewJiraIssuesSingle(c.slackClient, c.jira, c.jiraCfg, c.jiraReplies, c.regex),
 		NewJiraOverview(c.slackClient, c.jira, c.jiraCfg, c.jiraReplies, c.regex),
 	}
 }

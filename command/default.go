@@ -15,6 +15,7 @@ func GetDefaultCommands(slackClient client.SlackClient, jira *jira.Client, confi
 		Commands: []bot.Command{
 			NewHelp(slackClient, &commands),
 			NewJiraIssues(slackClient, jira, config.Jira, config.Replies, config.Regex),
+			NewJiraIssuesSingle(slackClient, jira, config.Jira, config.Replies, config.Regex),
 			NewJiraIssue(slackClient, jira, config.Jira, config.Replies),
 			NewJiraOverview(slackClient, jira, config.Jira, config.Replies, config.Regex),
 			NewAdminAddUser(slackClient),

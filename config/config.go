@@ -19,9 +19,12 @@ type JiraConfig struct {
 	Username     string
 	Password     string
 	Projects     []string            `yaml:",flow"`
+	Location     string
+	Components   map[string]string   `yaml:",flow"`
 	Statuses     map[string]string   `yaml:",flow"`
 	Priorities   map[string]Priority `yaml:",flow"`
 	FeatureTeams TeamConfig
+	TimeFormat   string
 	BugOverview  struct {
 		ListAll []string `yaml:",flow"`
 		All     string
@@ -68,19 +71,21 @@ type TeamConfig struct {
 
 // RegexConfig contains the various regex expressions to parse Slack messages for commands
 type RegexConfig struct {
-	JiraAssignee  string
-	JiraCustom    string
-	JiraIssueType string
-	JiraOption    string
-	JiraPriority  string
-	JiraProject   string
-	JiraSorting   string
-	JiraStatus    string
-	JiraTime      string
-	ReplyColor    string
-	ReplyLayout   string
-	ReplyList     string
-	ReplyTitle    string
-	CronCommand   string
-	CronTime      string
+	JiraAssignee    string
+	JiraCustom      string
+	JiraIssueType   string
+	JiraOption      string
+	JiraPriority    string
+	JiraProject     string
+	JiraSorting     string
+	JiraStatus      string
+	JiraTime        string
+	JiraOffsetTime  string
+	JiraOffsetField string
+	ReplyColor      string
+	ReplyLayout     string
+	ReplyList       string
+	ReplyTitle      string
+	CronCommand     string
+	CronTime        string
 }

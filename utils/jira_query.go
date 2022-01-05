@@ -5,34 +5,41 @@ import (
 	"github.com/tigerteufel85/boggy/client"
 	"github.com/tigerteufel85/boggy/config"
 	"html"
+	"regexp"
+	"strconv"
 	"strings"
+	"time"
 )
 
 // JQL is a wrapper with all information for a JIRA JQL
 type JQL struct {
-	Project  string
-	Type     string
-	Priority string
-	Status   string
-	Option   string
-	Time     string
-	Custom   string
-	Assignee string
-	Sorting  string
+	Project     string
+	Type        string
+	Priority    string
+	Status      string
+	Option      string
+	Time        string
+	OffsetTime  string
+	OffsetField string
+	Custom      string
+	Assignee    string
+	Sorting     string
 }
 
 // NewJQL provides all information needed for a JIRA JQL
 func NewJQL(config config.RegexConfig, input string) *JQL {
 	return &JQL{
-		Project:  ParseRegex(input, config.JiraProject),
-		Type:     ParseRegex(input, config.JiraIssueType),
-		Priority: ParseRegex(input, config.JiraPriority),
-		Status:   ParseRegex(input, config.JiraStatus),
-		Option:   ParseRegex(input, config.JiraOption),
-		Time:     ParseRegex(input, config.JiraTime),
-		Custom:   ParseRegex(input, config.JiraCustom),
-		Assignee: ParseRegex(input, config.JiraAssignee),
-		Sorting:  ParseRegex(input, config.JiraSorting),
+		Project:     ParseRegex(input, config.JiraProject),
+		Type:        ParseRegex(input, config.JiraIssueType),
+		Priority:    ParseRegex(input, config.JiraPriority),
+		Status:      ParseRegex(input, config.JiraStatus),
+		Option:      ParseRegex(input, config.JiraOption),
+		Time:        ParseRegex(input, config.JiraTime),
+		OffsetTime:  ParseRegex(input, config.JiraOffsetTime),
+		OffsetField: ParseRegex(input, config.JiraOffsetField),
+		Custom:      ParseRegex(input, config.JiraCustom),
+		Assignee:    ParseRegex(input, config.JiraAssignee),
+		Sorting:     ParseRegex(input, config.JiraSorting),
 	}
 }
 
@@ -70,6 +77,22 @@ func (jql *JQL) BuildJqlQuery(config config.JiraConfig) (string, error) {
 		case "resolved", "created":
 			results = append(results, fmt.Sprintf("%s >= -%s", jql.Option, jql.Time))
 		}
+	}
+
+	// prepare field with offset
+	if jql.OffsetField != "" && jql.OffsetTime != "" && jql.Time != "" {
+		loc, _ := time.LoadLocation(config.Location)
+		timein := time.Now().In(loc)
+		timein = addTime(timein, strings.ToLower(jql.OffsetTime))
+		timeout := addTime(timein, strings.ToLower(jql.Time))
+
+		results = append(results, fmt.Sprintf(
+			"\"%s\" >= \"%s\" AND \"%s\" <= \"%s\"",
+			jql.OffsetField,
+			timein.Format(config.TimeFormat),
+			jql.OffsetField,
+			timeout.Format(config.TimeFormat),
+		))
 	}
 
 	// prepare assignee with time
@@ -120,4 +143,30 @@ func getStatus(statuses map[string]string, input string) string {
 	}
 
 	return ""
+}
+
+func addTime(startTime time.Time, offset string) time.Time {
+	timeMinutes := regexp.MustCompile(`^[0-9]+m$`)
+	timeHours := regexp.MustCompile(`^[0-9]+h$`)
+	timeDays := regexp.MustCompile(`^[0-9]+d$`)
+	timeWeeks := regexp.MustCompile(`^[0-9]+w$`)
+
+	returnTime := startTime
+
+	switch {
+	case timeMinutes.MatchString(offset):
+		timeOffset, _ := strconv.Atoi(strings.ReplaceAll(offset, "m", ""))
+		returnTime = startTime.Add(time.Minute * time.Duration(timeOffset))
+	case timeHours.MatchString(offset):
+		timeOffset, _ := strconv.Atoi(strings.ReplaceAll(offset, "h", ""))
+		returnTime = startTime.Add(time.Hour * time.Duration(timeOffset))
+	case timeDays.MatchString(offset):
+		timeOffset, _ := strconv.Atoi(strings.ReplaceAll(offset, "d", ""))
+		returnTime = startTime.Add(time.Hour * 24 * time.Duration(timeOffset))
+	case timeWeeks.MatchString(offset):
+		timeOffset, _ := strconv.Atoi(strings.ReplaceAll(offset, "w", ""))
+		returnTime = startTime.Add(time.Hour * 24 * 7 * time.Duration(timeOffset))
+	}
+
+	return returnTime
 }

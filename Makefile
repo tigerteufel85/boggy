@@ -4,6 +4,7 @@ all: clean dep bin/boggy
 
 bin/boggy: dep
 	mkdir -p bin/
+	go mod tidy
 	GO111MODULE=on go build -ldflags="-s -w" -o bin/boggy *.go
 
 clean:

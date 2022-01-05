@@ -2,6 +2,7 @@ package bot
 
 import (
 	"bufio"
+	"fmt"
 	"github.com/nlopes/slack"
 	"github.com/tigerteufel85/boggy/client"
 	"github.com/tigerteufel85/boggy/config"
@@ -78,7 +79,7 @@ func getAllowedUsers() []User {
 
 // load the public and private channels and list of all users from current space
 func (b *Bot) loadChannelsUsersAndProjects(config *config.Config) error {
-	// load channels
+	fmt.Println("...Loading Channels")
 	var err error
 	var cursor string
 	var channels []slack.Channel
@@ -100,7 +101,7 @@ func (b *Bot) loadChannelsUsersAndProjects(config *config.Config) error {
 		}
 	}
 
-	// load users
+	fmt.Println("...Loading Users")
 	users, err := b.slackClient.GetUsers()
 	if err != nil {
 		return err
@@ -111,7 +112,7 @@ func (b *Bot) loadChannelsUsersAndProjects(config *config.Config) error {
 		client.Users[user.ID] = user.Name
 	}
 
-	// load projects
+	fmt.Println("...Loading Projects")
 	client.Projects = make(map[string]string)
 	for _, project := range config.Jira.Projects {
 		client.Projects[project] = project

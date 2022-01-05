@@ -10,6 +10,12 @@ jira:
     - DEF
     - GHI
 
+  location: "Europe/Berlin"
+
+  components:
+    "Backend": ":be:"
+    "Frontend": ":fe:"
+
   statuses:
     open: "Unresolved"
     unresolved: "Unresolved"
@@ -50,6 +56,8 @@ jira:
       "Infernal Squirrel": ":chipmunk:"
       "Raccoon": ":raccoon:"
       "Double Trouble": ":busts_in_silhouette:"
+
+  timeformat: "2006-01-02 03:04"
 
   bugoverview:
     listall:
@@ -154,9 +162,11 @@ regex:
   jirasorting: "(?i:<sort:)([a-zA-Z]*)(>)"
   jirastatus: "(?i:<status:)([a-zA-Z]*)(>)"
   jiratime: "(?i:<time:)([0-9]*[mhdw])(>)"
+  jiraoffsettime: "(?i:<offset-time:)([0-9]+[mhdw])(>)"
+  jiraoffsetfield: "(?i:<offset-field:)([a-zA-Z ]*)(>)"
   replycolor: "(?i:<color:)([a-zA-Z0-9]*)(>)"
   replylayout: "(?i:<layout:)([a-zA-Z0-9]*)(>)"
   replylist: "(?i:<list:)([a-zA-Z0-9]*)(>)"
-  replytitle: "(?i:<title>)([a-zA-Z0-9 .,;:=\"()><\\-+!?&|_]*)(</title>)"
-  croncommand: "(?i:<command>)([a-zA-Z0-9 .,;~:=\"()><\\-+!&|\\/_]*)(</command>)"
+  replytitle: "(?i:<title>)([a-zA-Z0-9 .,;:=\"()><\\-%+!?&|_]*)(</title>)"
+  croncommand: "(?i:<command>)([a-zA-Z0-9 .,;~:=\"()><\\-%+!&|\\/_]*)(</command>)"
   crontime: "(?i:<cron:)([0-9 *-?\\/]*)(>)"

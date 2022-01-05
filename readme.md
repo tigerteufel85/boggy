@@ -1,5 +1,5 @@
 # Boggy
-[![Build Status](https://travis-ci.com/tigerteufel85/boggy.svg)](https://travis-ci.com/tigerteufel85/boggy)
+[![Build Status](https://app.travis-ci.com/tigerteufel85/boggy.svg)](https://app.travis-ci.com/github/tigerteufel85/boggy)
 [![GoDoc](https://godoc.org/github.com/tigerteufel85/boggy?status.svg)](https://godoc.org/github.com/innogames/boggy)
 [![Go Report Card](https://goreportcard.com/badge/github.com/tigerteufel85/boggy)](https://goreportcard.com/report/github.com/tigerteufel85/boggy)
 [![Release](https://img.shields.io/github/release/tigerteufel85/boggy.svg)](https://github.com/tigerteufel85/boggy/releases)
@@ -103,6 +103,17 @@ Query information from Jira for or a whole list of tickets.
 #### `<jql>issuetype = bug AND created >=-100m</jql>`
 - filters by a JQL query, please do not add any ordering to it
 - please use with care as it makes the commands flexible but also more error prone
+
+## JIRA Single
+Query information from Jira and posts each issue one by one.
+
+### Parameters
+Generally the same parameters as for "JIRA Issues" can be used but there are a few additional ones.
+
+#### `<offset-field:Start Time>` + `<offset-time:1h>` + `<time:10m>`
+- queries tickets where the time from the Start Time field starts in 1h and lasts for 10m
+- if current time is 2022-01-01 10:00 and with an offset of 1h and time of 10m
+- it creates a query like `"Start Time" >= "2022-01-01 11:00" AND "Start Time" <= "2022-01-01 11:10"`
 
 ## Bugs Overview
 Creates an overview of the current bug status of a project.
