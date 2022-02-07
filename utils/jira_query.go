@@ -87,7 +87,7 @@ func (jql *JQL) BuildJqlQuery(config config.JiraConfig) (string, error) {
 		timeout := addTime(timein, strings.ToLower(jql.Time))
 
 		results = append(results, fmt.Sprintf(
-			"\"%s\" >= \"%s\" AND \"%s\" <= \"%s\"",
+			"\"%s\" >= \"%s\" AND \"%s\" < \"%s\"",
 			jql.OffsetField,
 			timein.Format(config.TimeFormat),
 			jql.OffsetField,
