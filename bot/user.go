@@ -3,7 +3,7 @@ package bot
 import (
 	"bufio"
 	"fmt"
-	"github.com/nlopes/slack"
+	"github.com/slack-go/slack"
 	"github.com/tigerteufel85/boggy/client"
 	"github.com/tigerteufel85/boggy/config"
 	"log"
@@ -84,8 +84,15 @@ func (b *Bot) loadChannelsUsersAndProjects(config *config.Config) error {
 	var cursor string
 	var channels []slack.Channel
 	client.Channels = make(map[string]string)
+
 	for {
-		params := slack.GetConversationsParameters{Cursor: cursor, Types: []string{"private_channel", "public_channel"}}
+		params := slack.GetConversationsParameters{
+			Limit: 1000,
+			Cursor: cursor,
+			ExcludeArchived: true,
+			Types: []string{"private_channel", "public_channel"},
+		}
+
 		channels, cursor, err = b.slackClient.GetConversations(&params)
 		if err != nil {
 			return err

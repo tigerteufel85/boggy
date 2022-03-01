@@ -6,7 +6,7 @@ import (
 	"github.com/tigerteufel85/boggy/client"
 	"strings"
 
-	"github.com/nlopes/slack"
+	"github.com/slack-go/slack"
 	"github.com/tigerteufel85/boggy/bot"
 	"regexp"
 	"sort"

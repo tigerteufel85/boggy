@@ -2,7 +2,7 @@ package client
 
 import (
 	"fmt"
-	"github.com/nlopes/slack"
+	"github.com/slack-go/slack"
 	"github.com/tigerteufel85/boggy/config"
 	"strings"
 )

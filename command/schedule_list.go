@@ -5,7 +5,7 @@ import (
 	"github.com/tigerteufel85/boggy/client"
 
 	"fmt"
-	"github.com/nlopes/slack"
+	"github.com/slack-go/slack"
 	"github.com/tigerteufel85/boggy/bot"
 	"strings"
 )

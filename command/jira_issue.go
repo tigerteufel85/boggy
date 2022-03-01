@@ -2,7 +2,7 @@ package command
 
 import (
 	"context"
-	"github.com/nlopes/slack"
+	"github.com/slack-go/slack"
 	"github.com/tigerteufel85/boggy/bot"
 	"github.com/tigerteufel85/boggy/client"
 	"github.com/tigerteufel85/boggy/config"
