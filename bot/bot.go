@@ -3,7 +3,7 @@ package bot
 import (
 	"context"
 	"fmt"
-	"github.com/nlopes/slack"
+	"github.com/slack-go/slack"
 	"github.com/tigerteufel85/boggy/client"
 	"github.com/tigerteufel85/boggy/config"
 	"strings"

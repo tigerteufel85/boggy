@@ -2,7 +2,7 @@ package utils
 
 import (
 	"fmt"
-	"github.com/nlopes/slack"
+	"github.com/slack-go/slack"
 	"github.com/tigerteufel85/boggy/config"
 	"gopkg.in/andygrunwald/go-jira.v1"
 	"strings"

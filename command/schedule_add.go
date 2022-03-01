@@ -7,7 +7,7 @@ import (
 	"github.com/tigerteufel85/boggy/config"
 	"strings"
 
-	"github.com/nlopes/slack"
+	"github.com/slack-go/slack"
 	"github.com/tigerteufel85/boggy/bot"
 	"github.com/tigerteufel85/boggy/utils"
 	"gopkg.in/andygrunwald/go-jira.v1"

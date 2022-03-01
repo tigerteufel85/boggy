@@ -1,7 +1,7 @@
 package bot
 
 import (
-	"github.com/nlopes/slack"
+	"github.com/slack-go/slack"
 	"github.com/tigerteufel85/boggy/client"
 	"time"
 )

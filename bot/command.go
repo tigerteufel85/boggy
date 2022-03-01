@@ -2,7 +2,7 @@ package bot
 
 import (
 	"context"
-	"github.com/nlopes/slack"
+	"github.com/slack-go/slack"
 )
 
 // Commands is a wrapper of a list of commands. Only the first matched command will be executed
